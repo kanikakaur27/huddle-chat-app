@@ -6,58 +6,29 @@ import ChatMessages from './ChatMessages';
 import { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { getDocs, orderBy, query, where } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+import { selectChatId } from '../features/chatSlice';
 
 function ChatSection() {
     const [convo, setConvo] = useState([]);
 
-    useEffect(async() => {
-      const chatsCollection = collection(db, 'chats');
-      const q = query(chatsCollection, orderBy('timestamp', 'desc'));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc)=>{
-          setConvo({
-              id: doc.id,
-              data:doc.data()
-          })
-      })
-    
-    }, []);
-    
+
+    const chatId = useSelector(selectChatId);    
+    console.log(chatId)
     
   return (
       <>
       
-      {/* <ChatsMain> */}
-
-
-        {/* <ChatHeader>
-            <Button>Clear Chat</Button>
-            <Button>More</Button>
-        </ChatHeader> */}
+      
         <ChatsContainer>
 
             {/* TODO: messages */}
             
-            {/* <ChatMessages chatRef={chatRef}>
-                {roomMessages?.docs.map(doc =>{
-                    const {message, timestamp, user, userimage } = doc.data();
-                    return (
-                        <Message
-                        key = {doc.id}
-                        message = {message}
-                        timestamp = {timestamp}
-                        user = {user}
-                        userimage = {userimage}
-                        />
-                    )
-                })}
-                <ChatBottom ref={chatRef} />
-            </ChatMessages> */}
+            {/* <p>{chatId}</p> */}
           
 
             <ChatInput />
         </ChatsContainer>
-      {/* </ChatsMain> */}
       </>
       
   )

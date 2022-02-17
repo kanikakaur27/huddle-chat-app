@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import SearchIcon from "@material-ui/icons/Search";
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Logo from '../Assets/chat-logo.png'
+import {signOut} from "firebase/auth"
+import { auth } from '../firebase';
+import { Button } from '@material-ui/core';
 
 function Navbar() {
   return (
@@ -39,6 +42,9 @@ function Navbar() {
                 <li>
                     <NotificationsIcon />
                 </li>
+                <Button onClick={()=>{console.log("first");signOut(auth)}}>
+                    LOGOUT
+                </Button>
             </ul>
           </NavRight>
       </NavContainer>

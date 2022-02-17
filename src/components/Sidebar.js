@@ -2,8 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import SearchIcon from "@material-ui/icons/Search";
+import { auth, db } from '../firebase';
+import {useAuthState} from "react-firebase-hooks/auth";
+import { addDoc, collection, query, where } from 'firebase/firestore';
+import {useCollection} from "react-firebase-hooks/firestore"
+import ContactName from './ContactName';
+
 
 function Sidebar() {
+    const [user] = useAuthState(auth);
+    const addChat=()=>{
+        const email=prompt("Enter email id");
+        addDoc(collection(db,"chats"),{
+            users: [email, user.email]
+        })
+    }
+// array-contains -> membership in array
+    const q = query(collection(db,"chats"),where('users','array-contains',user.email))
+
+    const [myChats] = useCollection(q);
+    console.log(myChats)
   return (
       <>
         <SidebarContainer>
@@ -14,8 +32,10 @@ function Sidebar() {
                     <Button hidden type='submit'> SEND </Button>
                 </form>
             </SidebarHeader> */}
-
-
+            <Button onClick={addChat}>Add Chat</Button>
+            {myChats?.docs?.map((doc)=>(
+                <ContactName key={doc.id} doc={doc} user={user}/>
+            ))}
             {/* TODO: chats */}
         </SidebarContainer>
       </>

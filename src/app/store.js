@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import appReducer from '../features/appSlice';
+import chatReducer from '../features/chatSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: appReducer,
+    chatReducer: chatReducer,
   },
 });
