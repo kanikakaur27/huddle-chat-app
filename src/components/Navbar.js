@@ -56,7 +56,7 @@ export default Navbar;
 const NavContainer = styled.div`
     display: flex;
     background-color: #F2F5F9;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 100%;
     align-items: center;
     position: fixed;
@@ -64,10 +64,10 @@ const NavContainer = styled.div`
 `
 
 const NavLeft = styled.div`
-    padding: 10px 20px;
+    padding: 5px 20px;
     height: 100%;
     width: 20%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     > img {
@@ -94,12 +94,12 @@ const NavRight = styled.div`
         text-decoration: none;
         justify-content: flex-end;
         padding: 0px 20px;
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
         align-items: center;
 
         > li {
             margin: 0px 10px;
-            border: 1px solid blue;
+            /* border: 1px solid blue; */
         }
     }
 

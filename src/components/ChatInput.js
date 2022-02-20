@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
+import { addDoc, collection, doc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from '../firebase';
+import {useAuthState} from "react-firebase-hooks/auth"
 
-function ChatInput() {
+function ChatInput({chatId}) {
+    const [message, setMessage] = useState("");
+    const [user] = useAuthState(auth);
+    const sendMessage=(e)=>{
+        e.preventDefault()
+        const docRef = doc(db, "chats", chatId);
+        const colRef = collection(docRef, "messages");
+
+        addDoc(colRef,{
+            // message:message
+            message,
+            timeStamp : serverTimestamp(),
+            sender: user.uid
+        }).then(()=>setMessage(""))
+    }
+
   return (
       <ChatInputContainer>
-          <form>
-              <input type="text" placeholder='Type a message' />
-              <Button type='submit' color='green'>
+          <form onSubmit={sendMessage}>
+              <input value={message} onChange={(e)=>setMessage(e.target.value)} type="text" placeholder='Type a message' />
+              <Button type='submit' color='primary'>
                   <SendIcon />
               </Button>
           </form>
@@ -23,10 +41,10 @@ const ChatInputContainer = styled.div`
     > form {
         position: relative;
         display: flex;
-        border: 2px solid black;
+        /* border: 2px solid black; */
         /* padding: 40px; */
         /* justify-content: center; */
-        padding-left: 40px
+        padding-left: 40px;
     }
 
     > form > input {
@@ -44,7 +62,7 @@ const ChatInputContainer = styled.div`
     > form > button {
         position: fixed;
         bottom: 45px;
-        right: 55px;
+        right: 40px;
         /* display: none !important; */
         
         /* background-color: green; */

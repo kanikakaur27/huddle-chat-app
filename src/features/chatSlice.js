@@ -5,6 +5,7 @@ const initialState = {
 }
 
 export const chatSlice = createSlice({
+    // go to store.js
     name: "chat",
     initialState, 
     reducers: {

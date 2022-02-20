@@ -29,9 +29,9 @@ export default SubNav;
 
 const SubNavContainer = styled.div`
     display: flex;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     position: fixed;
-    margin-top:85px;
+    margin-top:62px;
     width: 100%;
     background-color: #F2F5F9;
 `
@@ -69,7 +69,7 @@ const SubNavRight = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     padding-right: 10px;
     > button {
         background-color: white;

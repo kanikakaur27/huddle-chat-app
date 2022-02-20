@@ -21,18 +21,11 @@ function Sidebar() {
     const q = query(collection(db,"chats"),where('users','array-contains',user.email))
 
     const [myChats] = useCollection(q);
-    console.log(myChats)
   return (
       <>
         <SidebarContainer>
-            {/* <SidebarHeader>
-                <form>
-                    <SearchIcon style = {{ position:'relative', zIndex:2, left: 35, alignSelf: 'center', color:'gray'}}/>
-                    <input type="text" placeholder='SEARCH' />
-                    <Button hidden type='submit'> SEND </Button>
-                </form>
-            </SidebarHeader> */}
-            <Button onClick={addChat}>Add Chat</Button>
+            
+            <Button onClick={addChat}>+Add Chat</Button>
             {myChats?.docs?.map((doc)=>(
                 <ContactName key={doc.id} doc={doc} user={user}/>
             ))}
@@ -48,9 +41,17 @@ const SidebarContainer = styled.div`
     background-color: #F2F5F9;
     max-width: 350px;
     flex: 0.35;
-    border: 2px solid blue;
-    margin-top: 155px;
+    /* border: 2px solid blue; */
+    margin-top: 130px;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
     /* height: 100vh; */
+
+    > button {
+        display: flex;
+        
+    }
 `
 const SidebarHeader = styled.div`
     display: flex;
